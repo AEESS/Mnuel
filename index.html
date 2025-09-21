@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuel Front-End - Apprendre HTML, CSS et JS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f9c74f;
+            --danger: #f94144;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7f9;
+            color: var(--dark);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: white;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .nav-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+        }
+        
+        .nav-tabs a {
+            color: var(--gray);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .nav-tabs a:hover, .nav-tabs a.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Main content */
+        .main-container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            gap: 2rem;
+            flex: 1;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            flex: 0 0 250px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+        
+        .sidebar h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .chapters {
+            list-style: none;
+        }
+        
+        .chapters li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .chapters a {
+            display: block;
+            padding: 0.7rem;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .chapters a:hover, .chapters a.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Content */
+        .content {
+            flex: 1;
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .lesson-content {
+            margin-bottom: 2rem;
+        }
+        
+        .lesson-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .code-example {
+            background-color: #2d3a4b;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+        
+        .code-example pre {
+            margin: 0;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        /* Editor Section */
+        .editor-section {
+            margin-top: 2rem;
+            border-top: 2px solid var(--light-gray);
+            padding-top: 2rem;
+        }
+        
+        .editor-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .editor-tabs {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .editor-tab {
+            padding: 8px 15px;
+            background-color: var(--light-gray);
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .editor-tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .code-editor {
+            height: 200px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            padding: 10px;
+            resize: vertical;
+        }
+        
+        .editor-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .run-btn {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .reset-btn {
+            background-color: var(--light-gray);
+            color: var(--dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        /* Output Section */
+        .output-section {
+            margin-top: 2rem;
+        }
+        
+        .output-frame {
+            width: 100%;
+            height: 300px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            background-color: white;
+        }
+        
+        /* Exercise Section */
+        .exercise {
+            background-color: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .exercise h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .exercise h4 i {
+            color: var(--warning);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .footer-content {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                flex: 1;
+                width: 100%;
+            }
+            
+            .nav-tabs {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                <h1>Manuel Front-End</h1>
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle" class="theme-btn">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-tabs">
+                <li><a href="#" class="active">HTML</a></li>
+                <li><a href="#">CSS</a></li>
+                <li><a href="#">JavaScript</a></li>
+                <li><a href="#">Projets</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="main-container">
+        <aside class="sidebar">
+            <h3>Chapitres HTML</h3>
+            <ul class="chapters">
+                <li><a href="#" class="active">1. Introduction au HTML</a></li>
+                <li><a href="#">2. Structure de base</a></li>
+                <li><a href="#">3. Titres et paragraphes</a></li>
+                <li><a href="#">4. Listes et liens</a></li>
+                <li><a href="#">5. Images et médias</a></li>
+                <li><a href="#">6. Formulaires</a></li>
+                <li><a href="#">7. Tableaux</a></li>
+                <li><a href="#">8. Sémantique HTML5</a></li>
+            </ul>
+        </aside>
+        
+        <main class="content">
+            <h2>Introduction au HTML</h2>
+            
+            <div class="lesson-content">
+                <p>Le HTML (HyperText Markup Language) est le langage de balisage standard utilisé pour créer des pages web. Il décrit la structure d'une page web et consiste en une série d'éléments qui indiquent au navigateur comment afficher le contenu.</p>
+                
+                <p>Les éléments HTML sont les blocs de construction des pages web. Ils sont représentés par des balises qui entourent le contenu pour indiquer comment il doit être affiché.</p>
+                
+                <div class="code-example">
+                    <button class="copy-btn">Copier</button>
+                    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Ma première page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Bonjour le monde !&lt;/h1&gt;
+    &lt;p&gt;Ceci est mon premier paragraphe.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+                
+                <p>Dans cet exemple, nous pouvons voir :</p>
+                <ul>
+                    <li><code>&lt;!DOCTYPE html&gt;</code> - Déclare le type de document</li>
+                    <li><code>&lt;html&gt;</code> - L'élément racine de la page</li>
+                    <li><code>&lt;head&gt;</code> - Contient les métadonnées</li>
+                    <li><code>&lt;title&gt;</code> - Définit le titre de la page</li>
+                    <li><code>&lt;body&gt;</code> - Contient le contenu visible</li>
+                    <li><code>&lt;h1&gt;</code> - Un titre de niveau 1</li>
+                    <li><code>&lt;p&gt;</code> - Un paragraphe</li>
+                </ul>
+            </div>
+            
+            <div class="exercise">
+                <h4><i class="fas fa-puzzle-piece"></i> Exercice pratique</h4>
+                <p>Créez une page HTML simple avec un titre et deux paragraphes. Le titre doit dire "Bienvenue sur mon site" et les paragraphes doivent contenir quelques phrases de votre choix.</p>
+            </div>
+            
+            <div class="editor-section">
+                <h3>Éditeur de code</h3>
+                <p>Utilisez l'éditeur ci-dessous pour pratiquer. Vous pouvez voir le résultat en temps réel dans l'aperçu.</p>
+                
+                <div class="editor-container">
+                    <div class="editor-tabs">
+                        <div class="editor-tab active">HTML</div>
+                        <div class="editor-tab">CSS</div>
+                        <div class="editor-tab">JS</div>
+                    </div>
+                    
+                    <textarea class="code-editor" id="html-editor">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Ma page&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        h1 {
+            color: #4361ee;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Bienvenue sur mon site&lt;/h1&gt;
+    &lt;p&gt;Ceci est mon premier paragraphe. J'apprends le HTML !&lt;/p&gt;
+    &lt;p&gt;Voici un deuxième paragraphe pour m'exercer.&lt;/p&gt;
+    
+    &lt;script&gt;
+        // JavaScript viendra ici
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+                </div>
+                
+                <div class="editor-actions">
+                    <button class="reset-btn">Réinitialiser</button>
+                    <button class="run-btn">
+                        <i class="fas fa-play"></i> Exécuter le code
+                    </button>
+                </div>
+            </div>
+            
+            <div class="output-section">
+                <h3>Aperçu en temps réel</h3>
+                <iframe class="output-frame" id="output-frame"></iframe>
+            </div>
+        </main>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p>Manuel de Développement Front-End © 2023 - Tous droits réservés</p>
+            <p>Ressource éducative pour apprendre HTML, CSS et JavaScript</p>
+        </div>
+    </footer>
+
+    <script>
+        // Fonctionnalité de l'éditeur de code
+        document.addEventListener('DOMContentLoaded', function() {
+            const htmlEditor = document.getElementById('html-editor');
+            const outputFrame = document.getElementById('output-frame');
+            const runBtn = document.querySelector('.run-btn');
+            const resetBtn = document.querySelector('.reset-btn');
+            const copyButtons = document.querySelectorAll('.copy-btn');
+            
+            // Exécuter le code
+            function runCode() {
+                const htmlCode = htmlEditor.value;
+                const blob = new Blob([htmlCode], { type: 'text/html' });
+                outputFrame.src = URL.createObjectURL(blob);
+            }
+            
+            // Réinitialiser l'éditeur
+            function resetEditor() {
+                htmlEditor.value = `<!DOCTYPE html>
+<html>
+<head>
+    <title>Ma page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        h1 {
+            color: #4361ee;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenue sur mon site</h1>
+    <p>Ceci est mon premier paragraphe. J'apprends le HTML !</p>
+    <p>Voici un deuxième paragraphe pour m'exercer.</p>
+    
+    <script>
+        // JavaScript viendra ici
+    </script>
+</body>
+</html>`;
+                runCode();
+            }
+            
+            // Copier le code
+            function copyCode(button) {
+                const codeElement = button.nextElementSibling;
+                const textArea = document.createElement('textarea');
+                textArea.value = codeElement.textContent;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                button.textContent = 'Copié !';
+                setTimeout(() => {
+                    button.textContent = 'Copier';
+                }, 2000);
+            }
+            
+            // Événements
+            runBtn.addEventListener('click', runCode);
+            resetBtn.addEventListener('click', resetEditor);
+            
+            copyButtons.forEach(button => {
+                button.addEventListener('click', () => copyCode(button));
+            });
+            
+            // Exécuter le code au chargement initial
+            runCode();
+            
+            // Thème sombre/clair
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark-theme');
+                
+                if (document.body.classList.contains('dark-theme')) {
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
